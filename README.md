@@ -1,10 +1,5 @@
-# Spring Boot MongoDB Recipe Application
-MongoDB  Recipe App sample
-
-Application user accounts: 
-izzet / pass
-user / pass
-
+# Spring MVC REST API Sample App
+Spring MVC REST API Sample App
 
 [![CircleCI](https://circleci.com/gh/izzce/mongodb-recipe-app/tree/master.svg?style=svg&circle-token=26ecc270ab2cd53dc30763953ae984f67d48c5a4)](https://circleci.com/gh/izzce/mongodb-recipe-app/tree/master)
 
