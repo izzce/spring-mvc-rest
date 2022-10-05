@@ -61,10 +61,9 @@ jobs:
 
       - run:
           name: Send to CodeCov
-          command: curl -Os https://uploader.codecov.io/latest/linux/codecov; chmod +x codecov; ./codecov -t ${CODECOV_TOKEN}
+          command: curl -Os https://uploader.codecov.io/latest/linux/codecov; chmod +x codecov; ./codecov -t ${e999b76b-7b25-46eb-9a22-ffdd7a3a5d91}
           environment:
             CODECOV_TOKEN=e999b76b-7b25-46eb-9a22-ffdd7a3a5d91
-            
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
