@@ -58,10 +58,15 @@ jobs:
 
       - store_test_results:
           path: target/surefire-reports
-
+      
+      - store_artifacts:
+          path: target
+          
       - run:
           name: Send to CodeCov
-          command: bash <(curl -Os https://uploader.codecov.io/latest/linux/codecov; chmod +x codecov; ./codecov -t e999b76b-7b25-46eb-9a22-ffdd7a3a5d91)
+          command: curl -Os https://uploader.codecov.io/latest/linux/codecov; 
+                   chmod +x codecov;
+                   ./codecov -t e999b76b-7b25-46eb-9a22-ffdd7a3a5d91;
           environment:
             CODECOV_TOKEN: e999b76b-7b25-46eb-9a22-ffdd7a3a5d91
 # Invoke jobs via workflows
