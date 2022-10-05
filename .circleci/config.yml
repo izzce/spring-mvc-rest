@@ -58,9 +58,6 @@ jobs:
 
       - store_test_results:
           path: target/surefire-reports
-      
-      - store_artifacts:
-          path: target
           
       - run:
           name: Send to CodeCov
