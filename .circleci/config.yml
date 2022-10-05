@@ -61,11 +61,10 @@ jobs:
 
       - run:
           name: Send to CodeCov
-          command: bash <(curl -s https://codecov.io/bash)
-          # Access token as env var: https://app.codecov.io/gh/izzce/spring-mvc-rest
+          command: curl -Os https://uploader.codecov.io/latest/linux/codecov; chmod +x codecov; ./codecov -t ${CODECOV_TOKEN}
           environment:
             CODECOV_TOKEN=e999b76b-7b25-46eb-9a22-ffdd7a3a5d91
-
+            
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
