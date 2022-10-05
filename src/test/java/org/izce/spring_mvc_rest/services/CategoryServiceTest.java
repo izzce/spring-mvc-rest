@@ -1,0 +1,66 @@
+package org.izce.spring_mvc_rest.services;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.izce.spring_mvc_rest.api.v1.mapper.CategoryMapper;
+import org.izce.spring_mvc_rest.api.v1.model.CategoryDTO;
+import org.izce.spring_mvc_rest.domain.Category;
+import org.izce.spring_mvc_rest.repo.CategoryRepo;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+public class CategoryServiceTest {
+
+	public static final Long ID = 2L;
+	public static final String NAME = "Jimmy";
+	CategoryService categoryService;
+
+	@Mock
+	CategoryRepo categoryRepo;
+
+	@BeforeEach
+	public void setUp() throws Exception {
+		MockitoAnnotations.openMocks(this);
+
+		categoryService = new CategoryServiceImpl(CategoryMapper.INSTANCE, categoryRepo);
+	}
+
+	@Test
+	public void getAllCategories() throws Exception {
+		// given
+		List<Category> categories = Arrays.asList(new Category(), new Category(), new Category());
+
+		when(categoryRepo.findAll()).thenReturn(categories);
+		// when
+		List<CategoryDTO> categoryDTOS = categoryService.getAllCategories();
+
+		// then
+		assertEquals(3, categoryDTOS.size());
+
+	}
+
+	@Test
+	public void getCategoryByName() throws Exception {
+
+		// given
+		Category category = new Category();
+		category.setId(ID);
+		category.setName(NAME);
+
+		when(categoryRepo.findByName(anyString())).thenReturn(category);
+		// when
+		CategoryDTO categoryDTO = categoryService.getCategoryByName(NAME);
+
+		// then
+		assertEquals(ID, categoryDTO.getId());
+		assertEquals(NAME, categoryDTO.getName());
+	}
+
+}
