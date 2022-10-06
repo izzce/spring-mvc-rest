@@ -2,8 +2,10 @@ package org.izce.spring_mvc_rest.bootstrap;
 
 import org.izce.spring_mvc_rest.domain.Category;
 import org.izce.spring_mvc_rest.domain.Customer;
+import org.izce.spring_mvc_rest.domain.Vendor;
 import org.izce.spring_mvc_rest.repo.CategoryRepo;
 import org.izce.spring_mvc_rest.repo.CustomerRepo;
+import org.izce.spring_mvc_rest.repo.VendorRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,17 +17,20 @@ public class DataLoader implements CommandLineRunner {
 
 	private final CategoryRepo categoryRepo;
 	private final CustomerRepo customerRepo;
+	private final VendorRepo vendorRepo;
 
-	public DataLoader(CategoryRepo categoryRepo, CustomerRepo customerRepo) {
+	public DataLoader(CategoryRepo categoryRepo, CustomerRepo customerRepo, VendorRepo vendorRepo) {
 		log.debug("Initializing DataLoader...");
 		this.categoryRepo = categoryRepo;
 		this.customerRepo = customerRepo;
+		this.vendorRepo = vendorRepo;
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 		loadCategories();
 		loadCustomers();
+		loadVendors();
 	}
 
 	private void loadCategories() {
@@ -69,6 +74,23 @@ public class DataLoader implements CommandLineRunner {
 		customerRepo.save(customer2);
 
 		log.info("Customers Loaded: " + customerRepo.count());
+	}
+	
+	private void loadVendors() {
+		Vendor vendor1 = new Vendor();
+		vendor1.setId(1L);
+		vendor1.setName("Izce Fresh Fruits");
+
+		vendorRepo.save(vendor1);
+		
+		Vendor vendor2 = new Vendor();
+		vendor2.setId(2L);
+		vendor2.setName("Tema Shop");
+
+		vendorRepo.save(vendor2);
+
+		log.info("Vendors Loaded: " + vendorRepo.count());
+		
 	}
 
 }

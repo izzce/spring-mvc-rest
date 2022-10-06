@@ -12,6 +12,7 @@ import org.izce.spring_mvc_rest.bootstrap.DataLoader;
 import org.izce.spring_mvc_rest.domain.Customer;
 import org.izce.spring_mvc_rest.repo.CategoryRepo;
 import org.izce.spring_mvc_rest.repo.CustomerRepo;
+import org.izce.spring_mvc_rest.repo.VendorRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,6 +30,10 @@ public class CustomerServiceIT {
 	@Autowired
 	CategoryRepo categoryRepo;
 
+	@Autowired
+	VendorRepo vendorRepo;
+
+
 	CustomerService customerService;
 
 	@BeforeEach
@@ -37,7 +42,7 @@ public class CustomerServiceIT {
 		System.out.println(customerRepo.findAll().size());
 
 		// setup data for testing
-		DataLoader dataLoader = new DataLoader(categoryRepo, customerRepo);
+		DataLoader dataLoader = new DataLoader(categoryRepo, customerRepo, vendorRepo);
 		dataLoader.run(); // load data
 
 		customerService = new CustomerServiceImpl(CustomerMapper.INSTANCE, customerRepo);
