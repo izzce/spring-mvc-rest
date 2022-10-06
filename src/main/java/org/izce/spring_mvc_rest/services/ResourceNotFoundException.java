@@ -2,22 +2,26 @@ package org.izce.spring_mvc_rest.services;
 
 public class ResourceNotFoundException extends RuntimeException {
 
-    public ResourceNotFoundException() {
-    }
+	private static final long serialVersionUID = 4639806899813675678L;
 
-    public ResourceNotFoundException(String message) {
-        super(message);
-    }
+	public ResourceNotFoundException() {
 
-    public ResourceNotFoundException(String message, Throwable cause) {
-        super(message, cause);
-    }
+	}
 
-    public ResourceNotFoundException(Throwable cause) {
-        super(cause);
-    }
+	public ResourceNotFoundException(String message) {
+		super(message);
+	}
 
-    public ResourceNotFoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
+	public ResourceNotFoundException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
+	public ResourceNotFoundException(Throwable cause) {
+		super(cause);
+	}
+
+	public ResourceNotFoundException(String message, Throwable cause, boolean enableSuppression,
+			boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
 }
