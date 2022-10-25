@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 @RequestMapping(CATEGORY_CONTROLLER_BASE_URL)
 public class CategoryController {
@@ -24,12 +26,14 @@ public class CategoryController {
 
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
+	@Operation(summary = "Lists all available categories.")
 	public CategoryListDTO getAllCategories() {
 		return new CategoryListDTO(categoryService.getAllCategories());
 	}
 
 	@GetMapping("/{name}")
 	@ResponseStatus(HttpStatus.OK)
+	@Operation(summary = "Get a category with its name.")
 	public CategoryDTO getCategoryByName(@PathVariable String name) {
 		return categoryService.getCategoryByName(name);
 	}
