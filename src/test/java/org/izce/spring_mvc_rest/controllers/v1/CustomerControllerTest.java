@@ -66,7 +66,8 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
         when(customerService.getAllCustomers()).thenReturn(Arrays.asList(customer1, customer2));
 
         mockMvc.perform(get(CUSTOMER_CONTROLLER_BASE_URL)
-                .contentType(APPLICATION_JSON))
+                .contentType(APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.customers", hasSize(2)));
     }
@@ -84,7 +85,8 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
 
         //when
         mockMvc.perform(get(CUSTOMER_CONTROLLER_BASE_URL + "/1")
-                .contentType(APPLICATION_JSON))
+                .contentType(APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstname", equalTo("Michale")));
     }
@@ -106,6 +108,7 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
         //when/then
         mockMvc.perform(post(CUSTOMER_CONTROLLER_BASE_URL)
                     .contentType(MediaType.APPLICATION_JSON)
+                    .accept(MediaType.APPLICATION_JSON)
                     .content(asJsonString(customer)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.firstname", equalTo("Fred")))
@@ -129,6 +132,7 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
         //when/then
         mockMvc.perform(put(CUSTOMER_CONTROLLER_BASE_URL + "/1")
                 .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
                 .content(asJsonString(customer)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstname", equalTo("Fred")))
@@ -152,6 +156,7 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
 
         mockMvc.perform(patch(CUSTOMER_CONTROLLER_BASE_URL + "/1")
                 .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
                 .content(asJsonString(customer)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstname", equalTo("Fred")))

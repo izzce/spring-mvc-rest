@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -60,8 +61,11 @@ public class CategoryControllerTest {
 
 		when(categoryService.getAllCategories()).thenReturn(categories);
 
-		mockMvc.perform(get(CATEGORY_CONTROLLER_BASE_URL).contentType(APPLICATION_JSON))
-				.andExpect(status().isOk()).andExpect(jsonPath("$.categories", hasSize(2)));
+		mockMvc.perform(get(CATEGORY_CONTROLLER_BASE_URL)
+				.contentType(APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.categories", hasSize(2)));
 	}
 
 	@Test
@@ -72,8 +76,11 @@ public class CategoryControllerTest {
 
 		when(categoryService.getCategoryByName(anyString())).thenReturn(category1);
 
-		mockMvc.perform(get(CATEGORY_CONTROLLER_BASE_URL + "/Jim").contentType(APPLICATION_JSON))
-				.andExpect(status().isOk()).andExpect(jsonPath("$.name", equalTo(NAME)));
+		mockMvc.perform(get(CATEGORY_CONTROLLER_BASE_URL + "/Jim")
+				.contentType(APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.name", equalTo(NAME)));
 	}
 
 	@Test
@@ -81,7 +88,9 @@ public class CategoryControllerTest {
 
 		when(categoryService.getCategoryByName(anyString())).thenThrow(ResourceNotFoundException.class);
 
-		mockMvc.perform(get(CATEGORY_CONTROLLER_BASE_URL + "/Foo").contentType(APPLICATION_JSON))
+		mockMvc.perform(get(CATEGORY_CONTROLLER_BASE_URL + "/Foo")
+				.contentType(APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound());
 	}
 }
