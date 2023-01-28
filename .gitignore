@@ -1,5 +1,7 @@
-/target/
 !.mvn/wrapper/maven-wrapper.jar
+/target/
+/rest-model/target/
+/rest-app/target/
 
 ### STS ###
 .apt_generated
